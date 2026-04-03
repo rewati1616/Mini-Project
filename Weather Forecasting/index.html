@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>RewatiWeather 🌤️</title>
+  <style>
+    :root {
+      --primary: #3b82f6;
+      --accent: #6366f1;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Segoe UI', system-ui, sans-serif;
+      background: linear-gradient(135deg, #1e3a8a, #6366f1, #a855f7);
+      min-height: 100vh;
+      color: white;
+      padding: 20px;
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      background: rgba(255,255,255,0.12);
+      backdrop-filter: blur(16px);
+      border-radius: 28px;
+      border: 1px solid rgba(255,255,255,0.2);
+      box-shadow: 0 25px 50px rgba(0,0,0,0.3);
+      overflow: hidden;
+    }
+
+    header {
+      padding: 40px 50px;
+      text-align: center;
+      background: rgba(0,0,0,0.2);
+    }
+
+    h1 {
+      font-size: 3rem;
+      margin-bottom: 10px;
+    }
+
+    .welcome {
+      font-size: 1.4rem;
+      opacity: 0.95;
+    }
+
+    .search-area {
+      padding: 30px 50px;
+      display: flex;
+      gap: 15px;
+      flex-wrap: wrap;
+    }
+
+    input {
+      flex: 1;
+      min-width: 280px;
+      padding: 18px 24px;
+      border: none;
+      border-radius: 16px;
+      font-size: 1.1rem;
+      background: rgba(255,255,255,0.9);
+      color: #1e3a8a;
+      outline: none;
+    }
+
+    button {
+      padding: 18px 36px;
+      background: white;
+      color: #3b82f6;
+      border: none;
+      border-radius: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    button:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+    }
+
+    .current-weather {
+      padding: 40px 50px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 40px;
+      align-items: center;
+      background: rgba(255,255,255,0.08);
+    }
+
+    .current-main {
+      flex: 1;
+      min-width: 300px;
+    }
+
+    .temperature {
+      font-size: 5.5rem;
+      font-weight: 700;
+      line-height: 1;
+    }
+
+    .condition {
+      font-size: 1.6rem;
+      margin-top: 10px;
+      opacity: 0.95;
+    }
+
+    .location {
+      font-size: 1.8rem;
+      margin-bottom: 10px;
+    }
+
+    .details {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 20px;
+      margin-top: 30px;
+    }
+
+    .detail-item {
+      background: rgba(255,255,255,0.1);
+      padding: 16px;
+      border-radius: 16px;
+    }
+
+    .forecast {
+      padding: 40px 50px;
+    }
+
+    .section-title {
+      margin-bottom: 20px;
+      font-size: 1.5rem;
+      opacity: 0.9;
+    }
+
+    .daily-forecast {
+      display: flex;
+      gap: 12px;
+      overflow-x: auto;
+      padding-bottom: 10px;
+    }
+
+    .day-card {
+      min-width: 110px;
+      background: rgba(255,255,255,0.12);
+      padding: 20px 12px;
+      border-radius: 20px;
+      text-align: center;
+      transition: 0.3s;
+    }
+
+    .day-card:hover {
+      transform: translateY(-8px);
+      background: rgba(255,255,255,0.25);
+    }
+
+    .hourly-forecast {
+      margin-top: 40px;
+      overflow-x: auto;
+    }
+
+    .hourly-grid {
+      display: flex;
+      gap: 15px;
+    }
+
+    .hour-card {
+      min-width: 85px;
+      text-align: center;
+      padding: 15px 8px;
+      background: rgba(255,255,255,0.1);
+      border-radius: 16px;
+    }
+
+    .weather-icon {
+      font-size: 3rem;
+      margin: 10px 0;
+    }
+
+    .error {
+      color: #fca5a5;
+      text-align: center;
+      padding: 20px;
+    }
+
+    .footer {
+      text-align: center;
+      padding: 25px;
+      opacity: 0.8;
+      font-size: 0.95rem;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <header>
+      <h1>🌤️ RewatiWeatherApp 🌤️</h1>
+      <p class="welcome">Hi EveryOne! What's the weather like today?</p>
+    </header>
+
+    <div class="search-area">
+      <input type="text" id="cityInput" placeholder="Search city (e.g. Pune, Mumbai, London)" />
+      <button id="searchBtn">Search</button>
+      <button id="locationBtn">📍 My Location</button>
+    </div>
+
+    <div id="weatherContent">
+      <!-- Current weather and forecasts loaded by JS -->
+    </div>
+
+    <div class="footer">
+      Made with ❤️ for Rewati • Powered by RewatiWorld (Free Weather API)
+    </div>
+  </div>
+
+  <script>
+    const cityInput = document.getElementById('cityInput');
+    const searchBtn = document.getElementById('searchBtn');
+    const locationBtn = document.getElementById('locationBtn');
+    const weatherContent = document.getElementById('weatherContent');
+
+    let isCelsius = true;
+
+    // Weather condition emoji map
+    const weatherEmojis = {
+      0: "☀️", 1: "🌤️", 2: "⛅", 3: "☁️",
+      45: "🌫️", 48: "🌫️",
+      51: "🌦️", 53: "🌦️", 55: "🌦️",
+      61: "🌧️", 63: "🌧️", 65: "🌧️",
+      71: "❄️", 73: "❄️", 75: "❄️",
+      80: "🌦️", 81: "🌧️", 82: "⛈️",
+      95: "⛈️", 96: "⛈️", 99: "⛈️"
+    };
+
+    async function getCoordinates(city) {
+      const res = await fetch(`https://geocoding-api.open-meteo.com/v1/search?name=${encodeURIComponent(city)}&count=1&language=en&format=json`);
+      const data = await res.json();
+      if (!data.results || data.results.length === 0) throw new Error("City not found");
+      return {
+        latitude: data.results[0].latitude,
+        longitude: data.results[0].longitude,
+        name: data.results[0].name + ", " + (data.results[0].admin1 || data.results[0].country)
+      };
+    }
+
+    async function getWeather(lat, lon, locationName) {
+      const url = `https://api.open-meteo.com/v1/forecast?` +
+        `latitude=${lat}&longitude=${lon}` +
+        `&current=temperature_2m,relative_humidity_2m,apparent_temperature,weather_code,wind_speed_10m` +
+        `&daily=weather_code,temperature_2m_max,temperature_2m_min,sunrise,sunset` +
+        `&hourly=temperature_2m,weather_code` +
+        `&timezone=auto&forecast_days=7`;
+
+      const res = await fetch(url);
+      const data = await res.json();
+
+      renderWeather(data, locationName);
+    }
+
+    function renderWeather(data, locationName) {
+      const current = data.current;
+      const daily = data.daily;
+      const hourly = data.hourly;
+
+      const emoji = weatherEmojis[current.weather_code] || "🌡️";
+
+      let html = `
+        <div class="current-weather">
+          <div class="current-main">
+            <div class="location">${locationName}</div>
+            <div style="display:flex; align-items:center; gap:20px;">
+              <span class="weather-icon">${emoji}</span>
+              <div>
+                <div class="temperature" id="temp">${Math.round(current.temperature_2m)}°${isCelsius ? 'C' : 'F'}</div>
+                <div class="condition">Feels like ${Math.round(current.apparent_temperature)}°</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="details">
+            <div class="detail-item">
+              <strong>Humidity</strong><br>${current.relative_humidity_2m}%
+            </div>
+            <div class="detail-item">
+              <strong>Wind Speed</strong><br>${current.wind_speed_10m} km/h
+            </div>
+            <div class="detail-item">
+              <strong>Weather</strong><br>${getWeatherDescription(current.weather_code)}
+            </div>
+          </div>
+        </div>
+
+        <div class="forecast">
+          <h2 class="section-title">7-Day Forecast</h2>
+          <div class="daily-forecast">
+      `;
+
+      for (let i = 0; i < daily.time.length; i++) {
+        const date = new Date(daily.time[i]);
+        const dayName = i === 0 ? "Today" : date.toLocaleDateString('en-US', { weekday: 'short' });
+        const max = Math.round(daily.temperature_2m_max[i]);
+        const min = Math.round(daily.temperature_2m_min[i]);
+        const dayEmoji = weatherEmojis[daily.weather_code[i]] || "🌡️";
+
+        html += `
+          <div class="day-card">
+            <div>${dayName}</div>
+            <div class="weather-icon">${dayEmoji}</div>
+            <div><strong>${max}°</strong> / ${min}°</div>
+          </div>
+        `;
+      }
+
+      html += `</div></div>`;
+
+      // Hourly forecast (next 12 hours)
+      html += `
+        <div class="forecast">
+          <h2 class="section-title">Hourly Today</h2>
+          <div class="hourly-grid">
+      `;
+
+      const nowHour = new Date().getHours();
+      for (let i = 0; i < 12; i++) {
+        const index = (nowHour + i) % 24;
+        const time = new Date(hourly.time[index]);
+        const hourStr = time.getHours().toString().padStart(2, '0') + ":00";
+        const temp = Math.round(hourly.temperature_2m[index]);
+        const hEmoji = weatherEmojis[hourly.weather_code[index]] || "🌡️";
+
+        html += `
+          <div class="hour-card">
+            <div>${hourStr}</div>
+            <div class="weather-icon">${hEmoji}</div>
+            <div><strong>${temp}°</strong></div>
+          </div>
+        `;
+      }
+
+      html += `</div></div>`;
+
+      weatherContent.innerHTML = html;
+    }
+
+    function getWeatherDescription(code) {
+      const desc = {
+        0: "Clear sky", 1: "Mainly clear", 2: "Partly cloudy", 3: "Overcast",
+        45: "Fog", 48: "Depositing rime fog",
+        51: "Light drizzle", 61: "Slight rain", 71: "Slight snow fall",
+        80: "Slight rain showers", 95: "Thunderstorm"
+      };
+      return desc[code] || "Unknown";
+    }
+
+    // Search by city
+    async function searchCity() {
+      const city = cityInput.value.trim();
+      if (!city) return;
+
+      try {
+        weatherContent.innerHTML = `<p style="text-align:center;padding:40px;">Loading weather...</p>`;
+        const coords = await getCoordinates(city);
+        await getWeather(coords.latitude, coords.longitude, coords.name);
+      } catch (err) {
+        weatherContent.innerHTML = `<p class="error">❌ ${err.message}. Please try another city.</p>`;
+      }
+    }
+
+    // Get user's current location
+    async function getUserLocation() {
+      if (!navigator.geolocation) {
+        alert("Geolocation not supported by your browser");
+        return;
+      }
+
+      try {
+        weatherContent.innerHTML = `<p style="text-align:center;padding:40px;">Getting your location...</p>`;
+        navigator.geolocation.getCurrentPosition(async (position) => {
+          const lat = position.coords.latitude;
+          const lon = position.coords.longitude;
+
+          // Get city name
+          try {
+            const geoRes = await fetch(`https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${lat}&longitude=${lon}&localityLanguage=en`);
+            const geoData = await geoRes.json();
+            const locationName = geoData.city || geoData.locality || "Your Location";
+            await getWeather(lat, lon, locationName);
+          } catch {
+            await getWeather(lat, lon, "Your Current Location");
+          }
+        });
+      } catch (err) {
+        weatherContent.innerHTML = `<p class="error">Could not get your location. Please search manually.</p>`;
+      }
+    }
+
+    // Event Listeners
+    searchBtn.addEventListener('click', searchCity);
+    cityInput.addEventListener('keypress', (e) => {
+      if (e.key === 'Enter') searchCity();
+    });
+
+    locationBtn.addEventListener('click', getUserLocation);
+
+    // Load Pune weather by default (since you're in Pimpri, Maharashtra)
+    window.onload = async () => {
+      try {
+        const coords = await getCoordinates("Pimpri");
+        await getWeather(coords.latitude, coords.longitude, "Pimpri, Maharashtra");
+      } catch {
+        // Fallback to a major city
+        getWeather(18.52, 73.86, "Pune, India");
+      }
+    };
+  </script>
+</body>
+</html>
