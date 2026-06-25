@@ -9,7 +9,7 @@ A collection of small web development projects built using HTML, CSS, and JavaSc
 
 ---
 
-## ✨ Features
+## ✨ Features  
 
 - 🎯 Beginner-friendly mini projects  
 - 💻 Built using core web technologies  
