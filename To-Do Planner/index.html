@@ -31,7 +31,7 @@
       max-width: 600px;
       margin: 41px auto;
       background: var(--card);
-      border-radius: 20px;
+      border-radius: 20px;     
       box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
       overflow: hidden;
     }
@@ -79,7 +79,7 @@
     button {
       padding: 16px 28px;
       background: var(--primary);
-      color: white;
+      color: white;   
       border: none;
       border-radius: 12px;
       font-size: 1.1rem;
@@ -200,14 +200,14 @@
       <span id="totalTasks">0 tasks</span>
       <span id="completedTasks">0 completed</span>
     </div>
-
+   
     <div class="todo-list" id="todoList">
-      <!-- Tasks will be added here by JavaScript -->
+      <!-- Tasks will be added here by JavaScript -->  
     </div>
 
     <div class="footer">
-      <small>Made with ❤️ using HTML, CSS & JavaScript</small>
-    </div>
+      <small>Made with ❤️ using HTML, CSS & JavaScript </small>
+    </div>  
   </div>
 
   <script>
@@ -232,7 +232,7 @@
           </div>`;
         updateStats();
         return;
-      }
+      }  
 
       tasks.forEach((task, index) => {
         const item = document.createElement('div');
@@ -256,7 +256,7 @@
         const deleteBtn = item.querySelector('.delete-btn');
         deleteBtn.addEventListener('click', () => {
           tasks.splice(index, 1);
-          saveTasks();
+          saveTasks();  
           renderTasks();
         });
 
@@ -274,7 +274,7 @@
     // Update statistics
     function updateStats() {
       const total = tasks.length;
-      const completed = tasks.filter(task => task.completed).length;
+      const completed = tasks.filter(task => task.completed).length;  
 
       totalTasksEl.textContent = `${total} task${total !== 1 ? 's' : ''}`;
       completedTasksEl.textContent = `${completed} completed`;
