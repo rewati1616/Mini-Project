@@ -1,7 +1,7 @@
 # 🧩 Mini Projects Collection
 
 A collection of small web development projects built using HTML, CSS, and JavaScript. Each project focuses on improving core frontend skills and building real-world UI components through hands-on practice.
-  
+    
 ---
        
 ## 🚀 Repository Link
@@ -9,7 +9,7 @@ A collection of small web development projects built using HTML, CSS, and JavaSc
 
 ---
 
-## ✨ Features  
+## ✨ Features    
 
 - 🎯 Beginner-friendly mini projects  
 - 💻 Built using core web technologies  
@@ -23,7 +23,7 @@ A collection of small web development projects built using HTML, CSS, and JavaSc
 
 - HTML5  
 - CSS3  
-- JavaScript (Vanilla JS)
+- JavaScript ( Vanilla JS)
 
 ---
 
@@ -50,6 +50,6 @@ Mini-Project/
 
 ## 🚀 How to Run
 
-1. Clone the repository:
+1. Clone the repository :
 ```bash
 git clone https://github.com/rewati1616/Mini-Project.git
