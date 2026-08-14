@@ -3,11 +3,11 @@
 A collection of small web development projects built using HTML, CSS, and JavaScript. Each project focuses on improving core frontend skills and building real-world UI components through hands-on practice.
     
 ---
-       
+         
 ## 🚀 Repository Link
 🔗 https://github.com/rewati1616/Mini-Project
 
----
+--- 
 
 ## ✨ Features    
 
@@ -43,13 +43,13 @@ Mini-Project/
 
 - Practice frontend development consistently  
 - Improve UI/UX design skills  
-- Build small real-world projects  
+- Build small real-world projects   
 - Strengthen JavaScript fundamentals  
 
 ---
 
 ## 🚀 How to Run
 
-1. Clone the repository :
+1. Clone the repository : 
 ```bash
 git clone https://github.com/rewati1616/Mini-Project.git
