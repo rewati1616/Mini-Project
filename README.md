@@ -1,15 +1,15 @@
-# 🧩 Mini Projects Collections
+# 🧩 Mini Projects Collection
     
 A collection of small web development projects built using HTML, CSS, and JavaScript. Each project focuses on improving core frontend skills and building real-world UI components through hands-on practice.
     
 ---
              
-## 🚀 Repository Link
+## 🚀 Repository Links
 🔗 https://github.com/rewati1616/Mini-Project  
 
 --- 
 
-## ✨ Features    
+## ✨ Project Features 
 
 - 🎯 Beginner-friendly mini projects
 - 💻 Built using core web technologies
