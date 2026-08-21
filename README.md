@@ -21,9 +21,9 @@ A collection of small web development projects built using HTML, CSS, and JavaSc
 
 ## 🛠️ Technologies Used
 
-- HTML5  
-- CSS3  
-- JavaScript ( Vanilla JS)
+- HTML
+- CSS(Tailwind) 
+- JavaScript 
 
 ---
 
