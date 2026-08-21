@@ -3,19 +3,19 @@
 A collection of small web development projects built using HTML, CSS, and JavaScript. Each project focuses on improving core frontend skills and building real-world UI components through hands-on practice.
     
 ---
-         
-## 🚀 Repository Link
-🔗 https://github.com/rewati1616/Mini-Project
+             
+## 🚀 Repository Link   
+🔗 https://github.com/rewati1616/Mini-Project  
 
 --- 
 
 ## ✨ Features    
 
-- 🎯 Beginner-friendly mini projects  
-- 💻 Built using core web technologies  
+- 🎯 Beginner-friendly mini projects
+- 💻 Built using core web technologies
 - 📱 Responsive and user-friendly designs  
-- 🧠 Focus on logic building and UI development  
-- 🔁 Continuous practice and improvement  
+- 🧠 Focus on logic building and UI development   
+- 🔁 Continuous practice and improvement   
 
 ---
 
