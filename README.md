@@ -4,7 +4,7 @@ A collection of small web development projects built using HTML, CSS, and JavaSc
     
 ---
              
-## 🚀 Repository Link   
+## 🚀 Repository Link
 🔗 https://github.com/rewati1616/Mini-Project  
 
 --- 
@@ -42,13 +42,13 @@ Mini-Project/
 ## 🎯 Purpose of This Repository
 
 - Practice frontend development consistently  
-- Improve UI/UX design skills  
-- Build small real-world projects   
+- Improve UI/UX design skills   
+- Build small real-world projects    
 - Strengthen JavaScript fundamentals  
 
 ---
 
-## 🚀 How to Run
+## 🚀 How to Run project
 
 1. Clone the repository : 
 ```bash
