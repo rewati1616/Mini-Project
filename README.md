@@ -1,4 +1,4 @@
-# 🧩 Mini Projects Collection
+# 🧩 Mini Projects Collections
     
 A collection of small web development projects built using HTML, CSS, and JavaScript. Each project focuses on improving core frontend skills and building real-world UI components through hands-on practice.
     
